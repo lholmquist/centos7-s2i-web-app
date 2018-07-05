@@ -2,12 +2,6 @@
 
 set -e
 
-source /usr/libexec/s2i/env
-
-if [ "$DEV_MODE" == true ] ; then
-	set -x
-fi
-
 chmod 775 -R /tmp/src/.
 
 echo "---> Installing application source"
@@ -45,17 +39,23 @@ git config --list
 if [ ! -z "$YARN_ENABLED" ]; then
 	echo "---> Using 'yarn install' with YARN_ARGS"
 	yarn install $YARN_ARGS
+	yarn build
 else
 	echo "---> Installing dependencies"
-	if [ "$DEV_MODE" == true ]; then
-		echo "---> Using 'npm install'"
-		npm install
-	else
-		echo "---> Using 'npm install -s --only=production'"
-		npm install -s --only=production
-	fi
+	echo "---> Using 'npm install'"
+	npm install
+	npm run build
 	echo "---> Cleaning up npm cache"
 	rm -rf .npm
-	echo "---> Setting directory write permissions"
-	exec chmod -R g+rw .
+	# echo "---> Setting directory write permissions"
+	# exec chmod -R g+rw .
+fi
+
+echo "---> Building and Installing Web Application from source..."
+if [ -f /tmp/src/nginx.conf ]; then
+  mv /tmp/src/nginx.conf /etc/nginx/nginx.conf
+fi
+
+if [ "$(ls -A /tmp/src)" ]; then
+  mv /tmp/src/$OUTPUT_DIR/* /usr/share/nginx/html/
 fi

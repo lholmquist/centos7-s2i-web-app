@@ -1,4 +1,5 @@
-FROM openshift/base-centos7
+# FROM openshift/base-centos7
+FROM bucharestgold/centos7-s2i-nodejs
 # This image provides a Node.JS environment you can use to run your
 # Node.JS applications.
 
@@ -10,7 +11,10 @@ EXPOSE 8080
 ARG NODE_VERSION
 ARG NPM_VERSION
 
+ENV NGINX_VERSION=1.6.3
+
 ENV NPM_RUN=start \
+    OUTPUT_DIR=build \
     NODE_VERSION=${NODE_VERSION} \
     NPM_VERSION=${NPM_VERSION} \
     NODE_LTS=false \
@@ -42,7 +46,11 @@ LABEL io.k8s.description="$DESCRIPTION" \
 COPY ./s2i/ $STI_SCRIPTS_PATH
 COPY ./contrib/ /opt/app-root
 
-RUN /opt/app-root/etc/install_node.sh
+USER root
+
+RUN /opt/app-root/etc/install_nginx.sh
+# RUN /opt/app-root/etc/install_node.sh
+
 
 USER 1001
 

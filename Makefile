@@ -1,5 +1,5 @@
-FROM=openshift/base-centos7
-IMAGE_NAME=bucharestgold/centos7-s2i-nodejs
+FROM=bucharestgold/centos7-s2i-nodejs
+IMAGE_NAME=lholmquist/centos7-s2i-web-app
 
 # These values are changed in each version branch
 # This is the only place they need to be changed
@@ -9,7 +9,7 @@ include versions.mk
 TARGET=$(IMAGE_NAME):$(IMAGE_TAG)
 
 .PHONY: all
-all: build squash test
+all: build squash
 
 build: Dockerfile s2i contrib
 	docker build \
