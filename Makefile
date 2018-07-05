@@ -1,5 +1,5 @@
 FROM=bucharestgold/centos7-s2i-nodejs
-IMAGE_NAME=lholmquist/centos7-s2i-web-app
+IMAGE_NAME=bucharestgold/centos7-s2i-web-app
 
 # These values are changed in each version branch
 # This is the only place they need to be changed
