@@ -57,5 +57,5 @@ if [ -f /tmp/src/nginx.conf ]; then
 fi
 
 if [ "$(ls -A /tmp/src)" ]; then
-  mv /tmp/src/$OUTPUT_DIR/* /usr/share/nginx/html/
+  mv ./$OUTPUT_DIR/* /usr/share/nginx/html/
 fi
