@@ -18,3 +18,9 @@ chown -R 1001:1001 /var/lib/nginx
 touch /run/nginx.pid
 chown -R 1001:1001 /run/nginx.pid
 chown -R 1001:1001 /etc/nginx
+
+chmod 777 -R /var/log/nginx
+chmod 777 -R /var/lib/nginx /usr/share/nginx/html/ /run
+
+rm -rf /var/log/nginx/error.log
+rm -rf /var/log/nginx/access.log
