@@ -2,12 +2,15 @@
 
 set -e
 
-if [ "$(ls -A /tmp/src/node_modules)" ]; then
-	echo "---> Removing the node_modules folder"
-	rm -rf /tmp/src/node_modules
-fi
-
 chmod 775 -R /tmp/src/.
+
+
+ls -A /tmp/src
+
+# if [ "$(ls -A /tmp/src/node_modules)" ]; then
+	# echo "---> Removing the node_modules folder"
+rm -rf /tmp/src/node_modules
+# fi
 
 echo "---> Installing application source"
 cp -Rfp /tmp/src/. ./
