@@ -1,5 +1,5 @@
 ARG BG_IMAGE_TAG
-FROM nodeshift/centos7-s2i-nodejs:${BG_IMAGE_TAG}
+FROM registry.redhat.io/ubi7/nodejs-10:latest
 # This image provides a Node.JS environment you can use to build your Modern Web Applications
 
 EXPOSE 8080
