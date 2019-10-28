@@ -20,7 +20,7 @@ LABEL io.k8s.description="$DESCRIPTION" \
       summary="$SUMMARY" \
       description="$DESCRIPTION" \
       version="$NODE_VERSION" \
-      name="nodeshift/centos7-s2i-web-app"
+      name="nodeshift/ubi-s2i-web-app"
 
 COPY ./s2i/ $STI_SCRIPTS_PATH
 
